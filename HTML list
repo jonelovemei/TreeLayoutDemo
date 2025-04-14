@@ -1,0 +1,128 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 固定页头 */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            z-index: 1000;
+        }
+
+        /* 左侧树形菜单 */
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background: #34495e; /* 深蓝色 */
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        /* 右侧功能区 */
+        .content {
+            margin-left: 250px;
+            margin-top: 60px;
+            padding: 20px;
+            min-height: calc(100vh - 60px);
+            background: #f5f6fa; /* 浅色 */
+        }
+
+        /* 树形菜单样式 */
+        .tree {
+            list-style: none;
+            color: white;
+        }
+
+        .tree li {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .tree li::before {
+            content: "📁 ";
+        }
+
+        .tree li.collapsed::before {
+            content: "📂 ";
+        }
+
+        .tree ul {
+            margin-left: 20px;
+            display: none;
+        }
+
+        .tree li.active > ul {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 固定页头 -->
+    <div class="header">
+        <h1>企业管理系统</h1>
+    </div>
+
+    <!-- 左侧树形菜单 -->
+    <div class="sidebar">
+        <ul class="tree" id="treeMenu">
+            <li>部门管理
+                <ul>
+                    <li>人力资源部</li>
+                    <li>技术部</li>
+                    <li>财务部</li>
+                </ul>
+            </li>
+            <li>项目管理
+                <ul>
+                    <li>项目A</li>
+                    <li>项目B</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 右侧功能区 -->
+    <div class="content">
+        <h2>功能区</h2>
+        <p>当前选择的功能区域内容将在此显示。</p>
+    </div>
+
+    <script>
+        // 树形菜单交互逻辑
+        document.querySelectorAll('.tree li').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const subMenu = this.querySelector('ul');
+                if (subMenu) {
+                    this.classList.toggle('active');
+                    this.classList.toggle('collapsed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
