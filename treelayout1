@@ -1,0 +1,14 @@
+# 初始化本地Git仓库
+git init
+
+# 添加所有文件到暂存区
+git add .
+
+# 提交代码
+git commit -m "Initial commit: Add ASP.NET Core tree layout demo"
+
+# 关联远程GitHub仓库（替换yourusername为你的GitHub用户名）
+git remote add origin https://github.com/yourusername/TreeLayoutDemo.git
+
+# 推送代码到GitHub
+git push -u origin main
